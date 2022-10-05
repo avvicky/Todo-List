@@ -42,13 +42,13 @@ const listSchema = {
 
 const List = mongoose.model("List",listSchema);
 
-Item.insertMany(defaultItems, function(err){
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("successfully saved documents to DB");
-  }
-});
+// Item.insertMany(defaultItems, function(err){
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log("successfully saved documents to DB");
+//   }
+// });
 
 
 app.get("/", function(req, res) {
