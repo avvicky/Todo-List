@@ -50,7 +50,7 @@ const List = mongoose.model("List", listSchema);
 // });
 // changed this
 
-app.get("/", function (req, res) {
+app.get("/", { root: path.join(__dirname, "views") }, function (req, res) {
   Item.find({}, function (err, foundItems) {
     res.render("list", { listTitle: "Today", newListItems: foundItems });
   });
