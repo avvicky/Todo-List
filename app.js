@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const path = require("path");
 
 const app = express();
 
@@ -50,7 +51,7 @@ const List = mongoose.model("List", listSchema);
 // });
 // changed this
 
-app.get("/", function (req, res) {
+app.get("/", { root: path.join(__dirname, "views") }, function (req, res) {
   Item.find({}, function (err, foundItems) {
     res.render("list", { listTitle: "Today", newListItems: foundItems });
   });
@@ -114,17 +115,21 @@ app.get("/:customListName", function (req, res) {
         list.save();
         res.redirect("/" + customListName);
       } else {
-        res.render("list", {
-          listTitle: foundList.name,
-          newListItems: foundList.items,
-        });
+        res.render(
+          "list",
+          { root: path.join(__dirname, "views") },
+          {
+            listTitle: foundList.name,
+            newListItems: foundList.items,
+          }
+        );
       }
     }
   });
 });
 
 app.get("/about", function (req, res) {
-  res.render("about");
+  res.render("about", { root: path.join(__dirname, "views") });
 });
 
 let port = process.env.PORT;
