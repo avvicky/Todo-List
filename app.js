@@ -42,15 +42,6 @@ const listSchema = {
 
 const List = mongoose.model("List", listSchema);
 
-// Item.insertMany(defaultItems, function(err){
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log("successfully saved documents to DB");
-//   }
-// });
-// changed this
-
 app.get("/", function (req, res) {
   Item.find({}, function (err, foundItems) {
     res.render("list", { listTitle: "Today", newListItems: foundItems });
