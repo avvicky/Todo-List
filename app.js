@@ -44,7 +44,7 @@ const List = mongoose.model("List", listSchema);
 
 app.get("/", function (req, res) {
   Item.find({}, function (err, foundItems) {
-    res.render("list", { listTitle: "Today", newListItems: foundItems });
+    res.send("list", { listTitle: "Today", newListItems: foundItems });
   });
 });
 
