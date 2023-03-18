@@ -51,7 +51,7 @@ const List = mongoose.model("List", listSchema);
 // });
 // changed this
 
-app.get("/", { root: path.join(__dirname, "views") }, function (req, res) {
+app.get("/", function (req, res) {
   Item.find({}, function (err, foundItems) {
     res.render("list", { listTitle: "Today", newListItems: foundItems });
   });
@@ -115,21 +115,17 @@ app.get("/:customListName", function (req, res) {
         list.save();
         res.redirect("/" + customListName);
       } else {
-        res.render(
-          "list",
-          { root: path.join(__dirname, "views") },
-          {
-            listTitle: foundList.name,
-            newListItems: foundList.items,
-          }
-        );
+        res.render("list", {
+          listTitle: foundList.name,
+          newListItems: foundList.items,
+        });
       }
     }
   });
 });
 
 app.get("/about", function (req, res) {
-  res.render("about", { root: path.join(__dirname, "views") });
+  res.render("about");
 });
 
 let port = process.env.PORT;
@@ -138,7 +134,7 @@ if (port == null || port == "") {
 }
 
 app.listen(port, function () {
-  console.log("Server started on port " + { port });
+  console.log("Server started on port " + port);
 });
 
-module.exports = app;
+// module.exports = app;
