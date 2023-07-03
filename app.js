@@ -35,6 +35,8 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+defaultItems.save();
+
 const listSchema = {
   name: String,
   items: [itemsSchema],
@@ -43,9 +45,10 @@ const listSchema = {
 const List = mongoose.model("List", listSchema);
 
 app.get("/", function (req, res) {
-  Item.find({}, function (err, foundItems) {
-    res.send("list", { listTitle: "Today", newListItems: foundItems });
-  });
+  res.send("hello");
+  // Item.find({}, function (err, foundItems) {
+  //   res.render("list", { listTitle: "Today", newListItems: foundItems });
+  // });
 });
 
 app.post("/", function (req, res) {
@@ -75,7 +78,6 @@ app.post("/delete", function (req, res) {
   if (listName === "Today") {
     Item.findByIdAndRemove(checkedItemId, function (err) {
       if (!err) {
-        console.log("successfully delted checked item");
         res.redirect("/");
       }
     });
